@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PortfolioApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PortfolioApp.styles.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/61dd1fb8a7.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="navbar navbar-expand-xl navbar-light px-3 d-flex align-items-center justify-content-between">
+            <div class="navbar-brand d-flex align-items-center justify-content-center">
+                <i class="fa-solid fa-cat"></i>
+                <a class="nav-link" href="/">Мой Сайт</a>
+            </div>
+            <div class="collapse navbar-collapse" style="max-width: 400px;" id="navbarNav">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="/resume">Резюме</a>
+                    <a class="nav-link" href="/projects">Проекты</a>
+                </div>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - PortfolioApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

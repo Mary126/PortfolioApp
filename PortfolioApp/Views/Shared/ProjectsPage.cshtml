@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Projects.Data.ProjectCategory>
+@{
+
+}
+
+<div class="container container-xxl p-1">
+
+    @foreach(var category in Model)
+    {
+        <hr />
+        @Html.DisplayFor(a => category.Title)
+        <hr />
+        foreach (var project in category.Projects)
+        {
+            <div class="col-md-4">
+                <div class="card my-1">
+                    <div class="card-body">
+                        <h3> @Html.DisplayFor(a => project.Title)</h3>
+                        <div class="project-image my-3" style="background-image: url('@project.Images.FirstOrDefault().FileUrl')"></div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
