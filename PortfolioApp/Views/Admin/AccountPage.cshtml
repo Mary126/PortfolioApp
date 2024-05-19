@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Projects.Data.ProjectCategory>
+@{
+}
+
+@Html.ActionLink("Add Category", "Index", "AddCategory", null, new { @class = "btn btn-danger" })
+@foreach (var category in Model)
+{
+    <h1>@category.Title</h1>
+    @Html.ActionLink("Delete", "DeleteCategory", "Account", new { Id = @category.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Add Project", "Index", "AddProject", null, new { @class = "btn btn-danger" })
+    @Html.ActionLink("Edit Category", "Index", "EditCategory", new { Id = @category.Id }, new { @class = "btn btn-info" })
+    <hr />
+    @if (category.Projects is not null && category.Projects.Count > 0)
+    {
+        <div class="container">
+            @foreach (var project in category.Projects)
+            {
+                <div class="row border">
+                    <div class="col border">@project.Title</div>
+                    <div class="col-8 border">@project.GithubLink</div>
+                    <div class="col border"><button>Edit</button></div>
+                    <div class="col border">@Html.ActionLink("Delete", "DeleteProject", "Account", new { Id = @project.Id }, new { @class = "btn btn-primary" })</div>
+                </div>
+            }
+        </div>
+    }
+}

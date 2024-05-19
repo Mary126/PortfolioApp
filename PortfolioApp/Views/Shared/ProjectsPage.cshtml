@@ -10,16 +10,23 @@
         <hr />
         @Html.DisplayFor(a => category.Title)
         <hr />
-        foreach (var project in category.Projects)
-        {
-            <div class="col-md-4">
-                <div class="card my-1">
-                    <div class="card-body">
-                        <h3> @Html.DisplayFor(a => project.Title)</h3>
-                        <div class="project-image my-3" style="background-image: url('@project.Images.FirstOrDefault().FileUrl')"></div>
+        <div class="row">
+            @foreach (var project in category.Projects)
+            {
+                <div class="col-md-4 project" style="cursor:pointer" data-id="@project.Id">
+                    <div class="card my-1">
+                        <div class="card-body">
+                            <h3> @Html.DisplayFor(a => project.Title)</h3>
+                            <div class="project-image my-3"
+                                style="background-image: url('@project.Images.FirstOrDefault().FileUrl')"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
+        
     }
 </div>
+<div class="modal fade" id="projectModal" tabindex="-1" aria-labelledby="projectModalLabel" aria-hidden="true">
+</div>
+

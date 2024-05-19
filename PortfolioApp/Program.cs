@@ -11,10 +11,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => {
+    options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequiredLength = 5;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+})
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
+builder.Services.AddHttpClient();
 builder.WebHost.ConfigureKestrel(options =>
 {
     options.Limits.MaxRequestBodySize = 50 * 1024 * 1024;
@@ -47,6 +54,18 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "addCategory",
     pattern: "{controller=AddCategory}/{action=Index}");
+app.MapControllerRoute(
+    name: "getProjectDetails",
+    pattern: "{controller=GetProjectDetails}/{action=Get}");
+app.MapControllerRoute(
+    name: "register",
+    pattern: "{controller=Register}/{action=Index}");
+app.MapControllerRoute(
+    name: "login",
+    pattern: "{controller=Login}/{action=Index}");
+app.MapControllerRoute(
+    name: "accountPage",
+    pattern: "{controller=Account}/{action=Index}");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

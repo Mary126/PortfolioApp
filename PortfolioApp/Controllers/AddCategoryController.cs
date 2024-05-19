@@ -13,28 +13,25 @@ namespace PortfolioApp.Controllers
     public class AddCategoryController : Controller
     {
         public ApplicationDbContext _context;
-        private readonly ILogger _logger;
 
-        public AddCategoryController(ApplicationDbContext app, ILogger<AddCategoryController> logger)
+        public AddCategoryController(ApplicationDbContext app)
         {
             _context = app;
-            _logger = logger;
         }
         public IActionResult Index()
         {
-            return View("/Views/Shared/AddCategory.cshtml", new CreateCategory());
+            return View("/Views/Admin/AddCategory.cshtml", new CreateCategory());
         }
         [HttpPost]
         public IActionResult Create(CreateCategory model)
         {
             if (ModelState.IsValid)
             {
-
                 _context.ProjectCategories.Add(new ProjectCategory() { Id = Guid.NewGuid(), Title = model.Title});
                 _context.SaveChanges();
-                return RedirectToAction("ProjectsPage", "Projects");
+                return RedirectToAction("Index", "Account");
             }
-            else return View("/Views/Shared/AddCategory.cshtml", model);
+            else return View("/Views/Admin/AddCategory.cshtml", model);
         }
     }
 }

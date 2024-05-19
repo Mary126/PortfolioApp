@@ -1,9 +1,13 @@
-﻿namespace Projects.Data
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Projects.Data
 {
     public class Project
     {
         public Guid Id { get; set; }
+        [Required]
         public string? Title { get; set; }
+        [Required]
         public string? Description { get; set; }
         public string? FileUrl { get; set; }
         public virtual Guid ProjectCategoryId { get; set; }

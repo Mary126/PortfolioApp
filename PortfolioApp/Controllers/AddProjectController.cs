@@ -22,10 +22,10 @@ namespace PortfolioApp.Controllers
         {
             ViewBag.Categories = new SelectList(_context.ProjectCategories.ToList(), "Id", "Title");
             var Project = new Project();
-            return View("/Views/Shared/AddProject.cshtml", Project);
+            return View("/Views/Admin/AddProject.cshtml", Project);
         }
         [HttpPost]
-        public IActionResult Create(IFormFile fileObject, Project model, IEnumerable<IFormFile> Images)
+        public IActionResult Create(IFormFile? fileObject, Project model, IEnumerable<IFormFile> Images)
         {
             if (ModelState.IsValid)
             {
@@ -34,12 +34,13 @@ namespace PortfolioApp.Controllers
                 {
                     Directory.CreateDirectory(uploadDirectory);
                 }
-                if (fileObject == null) throw new ArgumentNullException($"File {fileObject}");
-                var projectName = GetUniqueFileName(fileObject.FileName);
-                uploadDirectory = Path.Combine(uploadDirectory, projectName);
-                fileObject.CopyTo(new FileStream(uploadDirectory, FileMode.Create));
+                if (fileObject != null) {
+                    var projectName = GetUniqueFileName(fileObject.FileName);
+                    uploadDirectory = Path.Combine(uploadDirectory, projectName);
+                    fileObject.CopyTo(new FileStream(uploadDirectory, FileMode.Create));
+                    model.FileUrl = "/Database/Images/" + projectName;
+                }
                 model.Id = Guid.NewGuid();
-                model.FileUrl = "/Database/Images/" + projectName;
                 List<Image> imagesToUpload = new List<Image>();
                 foreach (var imageFile in Images)
                 {
@@ -54,12 +55,12 @@ namespace PortfolioApp.Controllers
                 model.Images = imagesToUpload;
                 _context.Projects.Add(model);
                 _context.SaveChanges();
-                return RedirectToAction("ProjectsPage", "Projects");
+                return RedirectToAction("Index", "Account");
             }
             else
             {
                 ViewBag.Categories = new SelectList(_context.ProjectCategories.ToList(), "Id", "Title");
-                return View("/Views/Shared/AddProject.cshtml", model);
+                return View("/Views/Admin/AddProject.cshtml", model);
             }
                 
         }

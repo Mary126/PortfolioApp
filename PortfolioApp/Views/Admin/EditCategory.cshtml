@@ -1,0 +1,15 @@
+﻿@model Projects.Data.ProjectCategory
+@{
+
+}
+
+<form asp-controller="EditCategory" asp-action="Edit" method="post">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <div class="form-group">
+        <label class="control-label">Title</label>
+        <input name="Title" class="form-control" name="Title" value="@Model.Title">
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Edit" class="btn btn-primary" />
+    </div>
+</form>
