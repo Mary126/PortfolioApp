@@ -12,11 +12,13 @@
         <div class="modal-body">
             <p>@Model.Description</p>
             <div class="row">
-                @foreach (var Image in Model.Images)
-                {
-                    <div class="col-md-4"> 
-                        <div class="project-image" style="background-image: url('@Image.FileUrl')"></div>
-                    </div>
+                @if (Model.Images != null) {
+                    @foreach (var Image in Model.Images)
+                    {
+                        <div class="col-md-4">
+                            <div class="project-image" style="background-image: url('@Image.FileUrl')"></div>
+                        </div>
+                    }
                 }
             </div>
         </div>

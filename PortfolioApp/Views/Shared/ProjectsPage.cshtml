@@ -17,8 +17,11 @@
                     <div class="card my-1">
                         <div class="card-body">
                             <h3> @Html.DisplayFor(a => project.Title)</h3>
-                            <div class="project-image my-3"
-                                style="background-image: url('@project.Images.FirstOrDefault().FileUrl')"></div>
+                            @if (project.Images != null && project.Images.Any())
+                            {
+                                <div class="project-image my-3"
+                                    style="background-image: url('@project.Images.First().FileUrl')"></div>
+                            }
                         </div>
                     </div>
                 </div>
