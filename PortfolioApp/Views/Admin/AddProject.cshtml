@@ -32,7 +32,8 @@
     </div>
     <div class="form-group">
         <label class="control-label">Images</label>
-        <input type="file" name="Images" multiple accept=".jpg,.png" class="form-control" />
+        <input type="file" name="Images" required multiple accept=".jpg,.png" class="form-control" />
+        <span asp-validation-for="Images" class="text-danger"></span>
     </div>
     <div class="form-group">
         <input type="submit" value="Create" asp-action="Create" class="btn btn-primary" />

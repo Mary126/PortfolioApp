@@ -13,6 +13,7 @@ namespace Projects.Data
         public virtual Guid ProjectCategoryId { get; set; }
         public virtual ProjectCategory? ProjectCategory { get; set; }
         public string? GithubLink { get; set; }
+        [Required]
         public virtual IEnumerable<Image>? Images { get; set; }
     }
 }
