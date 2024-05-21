@@ -17,7 +17,7 @@ namespace PortfolioApp.Controllers
         [HttpGet]
         public IActionResult Get(Guid Id)
         {
-            Project project = _context.Projects.Find(Id);
+            Project? project = _context.Projects.Find(Id);
             if (project == null)
             {
                 return NotFound();

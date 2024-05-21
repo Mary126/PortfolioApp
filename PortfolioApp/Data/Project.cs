@@ -10,6 +10,7 @@ namespace Projects.Data
         [Required]
         public string? Description { get; set; }
         public string? FileUrl { get; set; }
+        [Required]
         public virtual Guid ProjectCategoryId { get; set; }
         public virtual ProjectCategory? ProjectCategory { get; set; }
         public string? GithubLink { get; set; }
